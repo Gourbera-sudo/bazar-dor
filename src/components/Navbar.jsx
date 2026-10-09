@@ -55,7 +55,7 @@ const Navbar = async () => {
         </div>
       </div>
 
-      {/* <NavLinks /> */}
+      <NavLinks />
     </div>
   );
 };
