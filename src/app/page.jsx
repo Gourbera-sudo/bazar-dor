@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div>
       
-      {/* <Banner></Banner> */}
+      <Banner></Banner>
       
     </div>
   );
