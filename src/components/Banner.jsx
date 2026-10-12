@@ -19,14 +19,10 @@ const Banner = async () => {
           <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl md:text-4xl">
             আজকের বাজারের দাম এক নজরে
           </h1>
-
-          {/* Subtitle / Description */}
           <p className="text-sm leading-relaxed text-gray-500 sm:text-base">
             চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার দাম — বাজারভিত্তিক
             বিস্তারিত, গড়, সর্বনিম্ন-সর্বাধিক এবং দামের পরিবর্তন এক জায়গায়।
           </p>
-
-          {/* CTA Button */}
           <div className="pt-2">
             <button
               type="button"

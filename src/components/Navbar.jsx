@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { connection } from "next/server";
 import NavLinks from "./NavLinks";
+import UserInfo from "./UserInfo";
 
 const Navbar = async () => {
   await connection();
@@ -26,32 +27,13 @@ const Navbar = async () => {
             </div>
 
             <div className="flex flex-col leading-tight">
-              <h1 className="text-3xl font-bold text-gray-800">
-                বাজার দর
-              </h1>
+              <h1 className="text-3xl font-bold text-gray-800">বাজার দর</h1>
 
-              <p className="text-[18px] text-gray-500">
-                {date}
-              </p>
+              <p className="text-[18px] text-gray-500">{date}</p>
             </div>
           </Link>
 
-          
-          <div className="flex items-center gap-2">
-            <Link
-              href="/login"
-              className="text-[18px] rounded-lg px-3 py-2 font-medium text-gray-700 transition hover:bg-gray-100"
-            >
-              সাইন ইন
-            </Link>
-
-            <Link
-              href="/signup"
-              className="text-[18px] rounded-lg bg-green-600 px-4 py-2.5 font-semibold text-white shadow-md transition hover:bg-green-700"
-            >
-              সাইন আপ
-            </Link>
-          </div>
+          <UserInfo></UserInfo>
         </div>
       </div>
 

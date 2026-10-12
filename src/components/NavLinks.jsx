@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const NavLinks = async () => {
@@ -10,11 +11,11 @@ const NavLinks = async () => {
   return (
     <div className="flex gap-10 container mx-auto py-7">
       {categories.map((category) => (
-        <div key={category.id} className="flex gap-2">
+        <Link href={`/category/${category.slug}`} key={category.id} className="flex gap-2">
             <span>{category.icon}</span>
             <span>{category.nameBn}</span>
         
-        </div>
+        </Link>
       ))}
     </div>
   );

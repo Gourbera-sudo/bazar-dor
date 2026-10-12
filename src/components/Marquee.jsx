@@ -3,14 +3,14 @@ import MarqueeText from "react-marquee-text";
 import "react-marquee-text/dist/styles.css";
 const Marquee = async () => {
   const res = await fetch(
-    "https://api.api-store.workers.dev/api/bazardor/products",
+    "https://openapi.programming-hero.com/api/bazardor/products",
   );
-  const data = await res.json();
-  console.log(data);
+  const result = await res.json();
+  console.log(result);
   return (
     <div className="border border-gray-500 p-2">
       <MarqueeText direction="right" duration={10}>
-        {data.map((headline) => (
+        {result.map((headline) => (
           <span key={headline.id} className="flex gap-2.5">
             <span>{headline.image}</span>
             <span>{headline.nameBn}</span>
