@@ -7,14 +7,16 @@ const NavLinks = async () => {
   );
   const categories = await res.json();
 
-
   return (
     <div className="flex gap-10 container mx-auto py-7">
       {categories.map((category) => (
-        <Link href={`/category/${category.slug}`} key={category.id} className="flex gap-2">
-            <span>{category.icon}</span>
-            <span>{category.nameBn}</span>
-        
+        <Link
+          href={`/category/${category.slug}`}
+          key={category.id}
+          className="flex gap-2"
+        >
+          <span>{category.icon}</span>
+          <span>{category.nameBn}</span>
         </Link>
       ))}
     </div>
