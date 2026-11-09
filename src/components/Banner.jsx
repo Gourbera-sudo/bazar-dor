@@ -1,13 +1,18 @@
+"use client";
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import { connection } from "next/server";
 import React from "react";
+import Link from "next/link";
 
-const Banner = async () => {
-  await connection();
+export default function Banner() {
+  const [date, setDate] = useState("");
 
-  const date = new Date().toLocaleDateString("bn-BD", {
-    dateStyle: "full",
-  });
+  useEffect(() => {
+    // ✅ safe: compute once after mount
+    const d = new Date().toLocaleDateString("bn-BD", { dateStyle: "full" });
+    setDate(d);
+  }, []);
+
   return (
     <div className="w-full bg-[#eef3f0] p-4 sm:p-6 md:p-8">
       <div className="relative mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 rounded-3xl border border-gray-200/60 bg-[#f9fbf9] p-6 sm:p-10 md:flex-row md:items-center md:p-12">
@@ -23,28 +28,27 @@ const Banner = async () => {
             চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার দাম — বাজারভিত্তিক
             বিস্তারিত, গড়, সর্বনিম্ন-সর্বাধিক এবং দামের পরিবর্তন এক জায়গায়।
           </p>
-          <div className="pt-2">
-            <button
-              type="button"
-              className="rounded-xl bg-[#038743] px-6 py-3 text-base font-medium text-white shadow-md shadow-emerald-700/20 transition-colors hover:bg-[#026d36] focus:outline-none focus:ring-2 focus:ring-[#038743] focus:ring-offset-2"
-            >
-              সব পণ্য দেখুন
-            </button>
-          </div>
+          <Link href="/#all-products">
+            <div className="pt-2">
+              <button
+                type="button"
+                className="rounded-xl bg-[#038743] px-6 py-3 text-base font-medium text-white shadow-md shadow-emerald-700/20 transition-colors hover:bg-[#026d36] focus:outline-none focus:ring-2 focus:ring-[#038743] focus:ring-offset-2"
+              >
+                সব পণ্য দেখুন
+              </button>
+            </div>
+          </Link>
         </div>
 
-        
         <div className="flex w-full items-end justify-end">
           <Image
             src="/bazar-hero.png"
             width={400}
-            height={400} 
+            height={400}
             alt="Market Basket"
           />
         </div>
       </div>
     </div>
   );
-};
-
-export default Banner;
+}

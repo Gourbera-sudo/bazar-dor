@@ -2,15 +2,18 @@
 import { authClient } from "@/lib/auth-client";
 import { Avatar } from "@heroui/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const UserInfo = () => {
+  const router = useRouter();
   const { data: session } = authClient.useSession();
   const user = session?.user;
-  console.log(user)
-  const handleSignout = async() => {
+
+  const handleSignout = async () => {
     await authClient.signOut();
-  }
+    router.refresh();
+  };
   return (
     <div>
       {user ? (

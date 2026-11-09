@@ -3,7 +3,7 @@ import React from "react";
 
 const NavLinks = async () => {
   const res = await fetch(
-    "https://api.api-store.workers.dev/api/bazardor/categories",
+    "https://openapi.programming-hero.com/api/bazardor/categories",
   );
   const categories = await res.json();
 
@@ -11,7 +11,7 @@ const NavLinks = async () => {
     <div className="flex gap-10 container mx-auto py-7">
       {categories.map((category) => (
         <Link
-          href={`/category/${category.slug}`}
+          href={`/category/${category.id}`}
           key={category.id}
           className="flex gap-2"
         >

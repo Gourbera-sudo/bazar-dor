@@ -1,5 +1,6 @@
 "use client";
-import { signUp } from "@/lib/auth-client";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   Button,
   Description,
@@ -9,33 +10,46 @@ import {
   Label,
   TextField,
 } from "@heroui/react";
-import { redirect } from "next/dist/server/api-utils";
+import { authClient } from "@/lib/auth-client";
 
 const SignUpPage = () => {
-  const onSubmit = async(e) => {
+  const router = useRouter();
+  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const onSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+    setIsSubmitting(true);
+
     const formData = new FormData(e.currentTarget);
+    const data = {};
+
     formData.forEach((value, key) => {
       data[key] = value.toString();
     });
-    const { data, error } = await signUp.email({
-    name: "John Doe", // required, The name of the user.
-    email: "john.doe@example.com", // required, The email address of the user.
-    password: "password1234", 
-    callbackURL: "/", // An optional URL to redirect to after the user signs up.
-});
-if(data){
-    console.log(data);
-    redirect("/");
-}
-if(error){
-    console.log(error)
-}
-    
+
+    const { error: signUpError } = await authClient.signUp.email({
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      callbackURL: "/",
+    });
+
+    setIsSubmitting(false);
+
+    if (signUpError) {
+      setError(signUpError.message || "Sign up failed. Please try again.");
+      return;
+    }
+
+    router.push("/");
+    router.refresh();
   };
+
   return (
-    <div className="flex flex-col items-center justify-center py-20">
-      <Form className="flex w-96 flex-col gap-4" onSubmit={onSubmit}>
+    <div className="flex justify-center my-12">
+      <Form className="flex flex-col w-96 gap-4" onSubmit={onSubmit}>
         <TextField
           isRequired
           name="name"
@@ -47,7 +61,7 @@ if(error){
           }}
         >
           <Label>Name</Label>
-          <Input placeholder="Your Name" />
+          <Input placeholder="Enter your Name" />
           <FieldError />
         </TextField>
         <TextField
@@ -62,7 +76,7 @@ if(error){
           }}
         >
           <Label>Email</Label>
-          <Input placeholder="Your Email" />
+          <Input placeholder="Enter Your Email" />
           <FieldError />
         </TextField>
         <TextField
@@ -90,8 +104,15 @@ if(error){
           </Description>
           <FieldError />
         </TextField>
+        {error ? (
+          <p className="text-sm text-red-600" role="alert">
+            {error}
+          </p>
+        ) : null}
         <div className="flex gap-2">
-          <Button type="submit">Submit</Button>
+          <Button type="submit" isDisabled={isSubmitting}>
+            {isSubmitting ? "Signing up..." : "Submit"}
+          </Button>
           <Button type="reset" variant="secondary">
             Reset
           </Button>

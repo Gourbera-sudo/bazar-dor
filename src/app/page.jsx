@@ -1,6 +1,9 @@
+import AllProducts from "@/components/AllProducts";
 import Banner from "@/components/Banner";
+import PriceDecreasedProducts from "@/components/PriceDecreasedProducts";
+import PriceIncreasedProducts from "@/components/PriceIncreasedProducts";
 
-export const instant = false;
+
 
 
 export default function Home() {
@@ -8,6 +11,9 @@ export default function Home() {
     <div>
       
       <Banner></Banner>
+      <PriceIncreasedProducts></PriceIncreasedProducts>
+      <PriceDecreasedProducts></PriceDecreasedProducts>
+      <AllProducts></AllProducts>
       
     </div>
   );

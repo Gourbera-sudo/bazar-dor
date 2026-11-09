@@ -1,6 +1,6 @@
-import { createAuthClient } from "better-auth/react"
-export const authClient = createAuthClient({
-    baseURL: process.env.BETTER_AUTH_URL
-})
+import { createAuthClient } from "better-auth/react";
 
-export const { signIn, signUp, useSession } = createAuthClient()
+// No baseURL: the browser client calls the auth routes on its own origin, so
+// sign-in keeps working when the dev server runs on a port other than
+// BETTER_AUTH_URL (e.g. when 3000 is already in use).
+export const authClient = createAuthClient();
